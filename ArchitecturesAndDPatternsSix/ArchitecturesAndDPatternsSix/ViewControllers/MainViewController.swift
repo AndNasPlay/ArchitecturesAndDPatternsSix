@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CongratulatoryDelegate {
 
 	private let stackViewLeadingTrailing: CGFloat = 60.0
 
@@ -17,7 +17,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 	private let tableViewSpacing: CGFloat = 20.0
 
-	private let arrOfAdditives: [String] = ["Coffee", "Milk", "Whip", "Sugar"]
+	private var arrOfAdditives: [String] = ["SimpleCoffee"]
+
+	private(set) lazy var congratulationViewController = CongratulationViewController()
+
+	var coffee = SimpleCoffee()
+
+	var priceCoffee: Int = 0
 
 	private(set) lazy var tableView: UITableView = {
 		var tableView = UITableView(frame: .zero, style: .plain)
@@ -32,7 +38,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		button.setTitleColor(.black, for: .normal)
 		button.setTitleColor(.white, for: .highlighted)
 		button.titleLabel?.font = UIFont.systemFont(ofSize: 17.0, weight: .semibold)
-		button.backgroundColor = .lightGray
+		button.backgroundColor = .green
 		button.layer.cornerRadius = stackViewSpacing
 		return button
 	}()
@@ -44,7 +50,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		button.setTitleColor(.black, for: .normal)
 		button.setTitleColor(.white, for: .highlighted)
 		button.titleLabel?.font = UIFont.systemFont(ofSize: 17.0, weight: .semibold)
-		button.backgroundColor = .lightGray
+		button.backgroundColor = .green
 		button.layer.cornerRadius = stackViewSpacing
 		return button
 	}()
@@ -56,7 +62,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		button.setTitleColor(.black, for: .normal)
 		button.setTitleColor(.white, for: .highlighted)
 		button.titleLabel?.font = UIFont.systemFont(ofSize: 17.0, weight: .semibold)
-		button.backgroundColor = .lightGray
+		button.backgroundColor = .green
 		button.layer.cornerRadius = stackViewSpacing
 		return button
 	}()
@@ -92,6 +98,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
 		createSubviews()
 		constraintsInit()
+		self.congratulationViewController.delegate = self
+		priceCoffee = coffee.cost
 	}
 
 	func createSubviews() {
@@ -141,29 +149,56 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
 
-		cell.textLabel?.text = "\(arrOfAdditives[indexPath.row]) price - "
-		cell.detailTextLabel?.text = "Count"
-		
+		cell.textLabel?.text = arrOfAdditives[indexPath.row]
+		if indexPath.row == 0 {
+			cell.detailTextLabel?.text = "price \(priceCoffee)"
+		}
 		return cell
 	}
 
 
 	@objc func handleAddMilkButtonTouchUpInseide() {
-
+		arrOfAdditives.append("Milk add")
+		priceCoffee += (CoffeeWithMilk(baseCoffee: coffee).cost - coffee.cost)
+		addMilkButton.isEnabled = false
+		addMilkButton.backgroundColor = .lightGray
+		tableView.reloadData()
 	}
 
 
 	@objc func handleAddWhipBkuttonTouchUpInseide() {
-
+		arrOfAdditives.append("Whip add")
+		priceCoffee += (CoffeeWithWhip(baseCoffee: coffee).cost - coffee.cost)
+		addWhipButton.isEnabled = false
+		addWhipButton.backgroundColor = .lightGray
+		tableView.reloadData()
 	}
 
 
 	@objc func handleAddSugarButtonTouchUpInseide() {
-
+		arrOfAdditives.append("Sugar add")
+		priceCoffee += (CoffeeWithSugar(baseCoffee: coffee).cost - coffee.cost)
+		addSugarButton.isEnabled = false
+		addSugarButton.backgroundColor = .lightGray
+		tableView.reloadData()
 	}
 
 	@objc func handleGetDrinkButtonTouchUpInseide() {
+		congratulationViewController.modalPresentationStyle = .overCurrentContext
+		congratulationViewController.modalTransitionStyle = .crossDissolve
+		present(congratulationViewController, animated: true, completion: nil)
+	}
 
+	func reloadInputData() {
+		arrOfAdditives = ["SimpleCoffee"]
+		addMilkButton.backgroundColor = .green
+		addMilkButton.isEnabled = true
+		addWhipButton.backgroundColor = .green
+		addWhipButton.isEnabled = true
+		addSugarButton.backgroundColor = .green
+		addSugarButton.isEnabled = true
+		priceCoffee = coffee.cost
+		tableView.reloadData()
 	}
 }
 
