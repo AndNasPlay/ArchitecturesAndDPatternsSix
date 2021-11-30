@@ -60,6 +60,7 @@
 		1627AD292755478A003F1BD7 /* ArchitecturesAndDPatternsSix */ = {
 			isa = PBXGroup;
 			children = (
+				1627AD492756535E003F1BD7 /* Proxy */,
 				1627AD4627562ABD003F1BD7 /* ViewControllers */,
 				1627AD3E27555366003F1BD7 /* Decorator */,
 				1627AD2A2755478B003F1BD7 /* AppDelegate.swift */,
@@ -82,11 +83,26 @@
 		1627AD4627562ABD003F1BD7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1627AD43275627A5003F1BD7 /* CongratulationUIView.swift */,
-				1627AD4127562763003F1BD7 /* CongratulationViewController.swift */,
 				1627AD2E2755478B003F1BD7 /* MainViewController.swift */,
+				1627AD4A27565379003F1BD7 /* CongratulationViewController */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1627AD492756535E003F1BD7 /* Proxy */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Proxy;
+			sourceTree = "<group>";
+		};
+		1627AD4A27565379003F1BD7 /* CongratulationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1627AD43275627A5003F1BD7 /* CongratulationUIView.swift */,
+				1627AD4127562763003F1BD7 /* CongratulationViewController.swift */,
+			);
+			path = CongratulationViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,6 +115,7 @@
 				1627AD232755478A003F1BD7 /* Sources */,
 				1627AD242755478A003F1BD7 /* Frameworks */,
 				1627AD252755478A003F1BD7 /* Resources */,
+				1627AD47275652C3003F1BD7 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -152,6 +169,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1627AD47275652C3003F1BD7 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1627AD232755478A003F1BD7 /* Sources */ = {

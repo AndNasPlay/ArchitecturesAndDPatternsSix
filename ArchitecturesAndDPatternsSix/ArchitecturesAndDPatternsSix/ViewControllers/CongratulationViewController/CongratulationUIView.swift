@@ -101,4 +101,3 @@ class CongratulationUIView: UIView {
 		delegate?.done()
 	}
 }
-

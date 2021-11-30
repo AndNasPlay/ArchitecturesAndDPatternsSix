@@ -43,7 +43,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		return button
 	}()
 
-	private(set) lazy var addWhipButton:  UIButton = {
+	private(set) lazy var addWhipButton: UIButton = {
 		var button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.setTitle("Whip", for: .normal)
@@ -55,7 +55,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		return button
 	}()
 
-	private(set) lazy var addSugarButton:  UIButton = {
+	private(set) lazy var addSugarButton: UIButton = {
 		var button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.setTitle("Sugar", for: .normal)
@@ -156,7 +156,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		return cell
 	}
 
-
 	@objc func handleAddMilkButtonTouchUpInseide() {
 		arrOfAdditives.append("Milk add")
 		priceCoffee += (CoffeeWithMilk(baseCoffee: coffee).cost - coffee.cost)
@@ -165,7 +164,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		tableView.reloadData()
 	}
 
-
 	@objc func handleAddWhipBkuttonTouchUpInseide() {
 		arrOfAdditives.append("Whip add")
 		priceCoffee += (CoffeeWithWhip(baseCoffee: coffee).cost - coffee.cost)
@@ -173,7 +171,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		addWhipButton.backgroundColor = .lightGray
 		tableView.reloadData()
 	}
-
 
 	@objc func handleAddSugarButtonTouchUpInseide() {
 		arrOfAdditives.append("Sugar add")
@@ -201,4 +198,3 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		tableView.reloadData()
 	}
 }
-
